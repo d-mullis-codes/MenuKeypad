@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MenuKeypad Library Readme</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { color: #333; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+        pre { background-color: #f8f8f8; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .version { font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <h1>MenuKeypad Library</h1>
+    <p>A simple, robust library for interfacing with a 5-key directional menu keypad (Up, Down, Left, Right, Select) on Arduino-compatible boards.</p>
+    <p class="version"><strong>Version: 1.1.2</strong></p>
+    <p><strong>Author:</strong> David Mullis</p>
+    <p><strong>License:</strong> GPL-3.0</p>
+
+    <h2>📌 Features</h2>
+    <ul>
+        <li><strong>5-Key Support:</strong> Up, Down, Left, Right, Select.</li>
+        <li><strong>Active LOW Logic:</strong> Designed for keypads using external pull-up resistors (pin is LOW when pressed).</li>
+        <li><strong>Single-Shot Debouncing:</strong> Implements non-blocking, single-shot (edge detection) logic, ensuring a key press is registered only once per press-release cycle.</li>
+        <li><strong>Simple Interface:</strong> Easy-to-use <code>readKey()</code> function.</li>
+    </ul>
+
+    <h2>🛠️ Hardware Setup (Arduino Nano)</h2>
+    <p>The library is designed for the following pinout:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Function</th>
+                <th>Arduino Pin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Key Up</strong></td>
+                <td>D5</td>
+            </tr>
+            <tr>
+                <td><strong>Key Down</strong></td>
+                <td>D4</td>
+            </tr>
+            <tr>
+                <td><strong>Key Left</strong></td>
+                <td>D3</td>
+            </tr>
+            <tr>
+                <td><strong>Key Right</strong></td>
+                <td>D7</td>
+            </tr>
+            <tr>
+                <td><strong>Key Select</strong></td>
+                <td>D6</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Wiring:</h3>
+    <ol>
+        <li>Connect one side of each momentary button to the specified digital pin.</li>
+        <li>Connect the other side of each momentary button to <strong>GND</strong>.</li>
+        <li>Connect an external pull-up resistor (e.g., 10k&Omega;) from each digital pin to <strong>VCC</strong> (5V on the Nano).</li>
+    </ol>
+
+    <h2>🚀 Usage</h2>
+
+    <h3>Installation</h3>
+    <ol>
+        <li>Download the library files (<code>MenuKeypad.h</code>, <code>MenuKeypad.cpp</code>, etc.).</li>
+        <li>Ensure the main folder is named <code>MenuKeypad</code>.</li>
+        <li>Place the <code>MenuKeypad</code> folder into your Arduino Sketchbook's <code>libraries</code> folder.</li>
+    </ol>
+
+    <h3>Example Sketch</h3>
+    <p>Use the <code>readKey()</code> method in your <code>loop()</code> to check for a single-shot press event:</p>
+
+    <pre><code>#include &lt;MenuKeypad.h&gt;
+
+// Define the pins 
+#define UP_KEY_PIN      5 
+// ... other pin definitions
+
+MenuKeypad keypad(UP_KEY_PIN, DOWN_KEY_PIN, LEFT_KEY_PIN, RIGHT_KEY_PIN, SELECT_KEY_PIN);
+
+void setup() {
+  Serial.begin(9600);
+  keypad.begin(); // Initialize pins
+}
+
+void loop() {
+  KeyPress key = keypad.readKey();
+
+  if (key != KEY_NONE) {
+    // This block executes only once per button press.
+    switch (key) {
+      case KEY_UP: 
+          // Move menu cursor up
+          break;
+      case KEY_SELECT: 
+          // Confirm selection
+          break;
+      // ... other cases
+    }
+  }
+}</code></pre>
+
+</body>
+</html>

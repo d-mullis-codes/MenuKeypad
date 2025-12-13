@@ -1,0 +1,14 @@
+#######################################
+# MenuKeypad Keywords
+#######################################
+
+MenuKeypad    KEYWORD1
+readKey       KEYWORD2
+begin         KEYWORD2
+KeyPress      KEYWORD2
+KEY_UP        LITERAL1
+KEY_DOWN      LITERAL1
+KEY_LEFT      LITERAL1
+KEY_RIGHT     LITERAL1
+KEY_SELECT    LITERAL1
+KEY_NONE      LITERAL1
